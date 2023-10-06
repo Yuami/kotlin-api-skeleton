@@ -1,10 +1,7 @@
 package com.codely.course.application
 
 import com.codely.course.BaseTest
-import com.codely.course.domain.Course
-import com.codely.course.domain.CourseRepository
-import com.codely.course.domain.InvalidCourseIdException
-import com.codely.course.domain.InvalidCourseNameException
+import com.codely.course.domain.*
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.BeforeEach
@@ -19,7 +16,8 @@ class CourseCreatorTest: BaseTest() {
     @BeforeEach
     fun setUp() {
         courseRepository = mockk(relaxUnitFun = true)
-        courseCreator = CourseCreator(courseRepository)
+        clock = mockk()
+        courseCreator = CourseCreator(courseRepository, clock)
     }
 
     @Test
