@@ -23,8 +23,30 @@ class CourseCreatorTest: BaseTest() {
     @Test
     fun `should create a course successfully`() {
         givenFixedDate(fixedDate)
-        courseCreator.create(id, name)
+        courseCreator.create(id, name, description)
         thenTheCourseShouldBeSaved()
+    }
+
+    @Test
+    fun `should fail with invalid id`() {
+        givenFixedDate(fixedDate)
+
+        assertThrows<InvalidCourseIdException> { courseCreator.create("Invalid", name, description) }
+    }
+
+    @Test
+    fun `should fail with invalid name`() {
+        givenFixedDate(fixedDate)
+
+        assertThrows<InvalidCourseNameException> { courseCreator.create(id, "    ", description) }
+        assertThrows<InvalidCourseNameException> { courseCreator.create(id, "", description) }
+    }
+
+    @Test
+    fun `should fail when description is longer than 150 characters`() {
+        givenFixedDate(fixedDate)
+        val descriptionLongerThan150Characters = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        assertThrows<InvalidCourseDescriptionException> { courseCreator.create(id, name, descriptionLongerThan150Characters) }
     }
 
     private fun thenTheCourseShouldBeSaved() {
@@ -32,29 +54,16 @@ class CourseCreatorTest: BaseTest() {
             Course.from(
                 id = id,
                 name = name,
+                description = description,
                 createdAt = fixedDate
             )
         ) }
     }
 
-    @Test
-    fun `should fail with invalid id`() {
-        givenFixedDate(fixedDate)
-
-        assertThrows<InvalidCourseIdException> { courseCreator.create("Invalid", name) }
-    }
-
-    @Test
-    fun `should fail with invalid name`() {
-        givenFixedDate(fixedDate)
-
-        assertThrows<InvalidCourseNameException> { courseCreator.create(id, "    ") }
-        assertThrows<InvalidCourseNameException> { courseCreator.create(id, "") }
-    }
-
     companion object {
         private const val id = "caebae03-3ee9-4aef-b041-21a400fa1bb7"
         private const val name = "Kotlin Hexagonal Architecture Api"
+        private const val description = "We want to practice how to work with hexagonal architecture"
         private val fixedDate = LocalDateTime.parse("2023-10-06T00:00:00")
     }
 }
