@@ -14,5 +14,6 @@ class DependencyInjectionConfig {
     fun clock() = LocalDateTimeClock()
 
     @Bean
-    fun courseCreator(courseRepository: CourseRepository, clock: Clock) = CourseCreator(courseRepository, clock)
+    fun courseCreator(courseRepository: CourseRepository, clock: Clock) =
+        CourseCreator(courseRepository, clock)
 }

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.time.LocalDateTime
 
-class CourseCreatorTest: BaseTest() {
+class CourseCreatorTest : BaseTest() {
     private lateinit var courseRepository: CourseRepository
     private lateinit var courseCreator: CourseCreator
 

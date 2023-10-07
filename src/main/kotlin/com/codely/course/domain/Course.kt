@@ -1,7 +1,7 @@
 package com.codely.course.domain
 
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 data class CourseId(val value: UUID) {
     companion object {
@@ -12,7 +12,8 @@ data class CourseId(val value: UUID) {
         }
     }
 }
-data class CourseName (val value: String) {
+
+data class CourseName(val value: String) {
     init {
         validate()
     }
@@ -23,7 +24,8 @@ data class CourseName (val value: String) {
         }
     }
 }
-data class CourseDescription (val value: String) {
+
+data class CourseDescription(val value: String) {
     init {
         validate()
     }
