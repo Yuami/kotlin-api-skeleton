@@ -70,7 +70,7 @@ flyway {
     val host = System.getenv("POSTGRE_URL") ?: "localhost"
     val port = "5432"
 
-    url = "jdbc:postgresql://$host:$port/course_database"
-    user = System.getenv("POSTGRE_USERNAME") ?: "course_username"
-    password = System.getenv("POSTGRE_PASSWORD") ?: "course_password"
+    url = "jdbc:postgresql://$host:$port/course"
+    user = System.getenv("POSTGRE_USERNAME") ?: "user"
+    password = System.getenv("POSTGRE_PASSWORD") ?: "password"
 }

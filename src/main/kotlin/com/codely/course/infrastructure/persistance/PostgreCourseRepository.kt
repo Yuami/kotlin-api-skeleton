@@ -5,7 +5,7 @@ import com.codely.course.domain.CourseRepository
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 
-class PostgresCourseRepository(
+class PostgreCourseRepository(
     private val jdbcTemplate: NamedParameterJdbcTemplate
 ) : CourseRepository {
     override fun save(course: Course) {
